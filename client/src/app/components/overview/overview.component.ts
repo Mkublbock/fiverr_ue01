@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AvailableDevice } from '../../models/device.available';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
+import {AuthService} from "../../services/authservice";
 
 @Component({
   selector: 'app-overview',
@@ -10,11 +11,15 @@ import { HttpClient } from '@angular/common/http';
 export class OverviewComponent implements OnInit {
   devices: AvailableDevice[] = [];
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService:AuthService) {
   }
 
   ngOnInit() {
     this.http.get<AvailableDevice[]>('http://localhost:8081/api/devices').subscribe(data => this.devices = data);
     console.log(this.devices);
+  }
+
+  logout(){
+    
   }
 }
