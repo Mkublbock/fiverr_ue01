@@ -1,2 +1,40 @@
-<!-- TODO Implement basic HTML structure here -->
-<p>Ready to get started!</p>
+<body data-decimal-separator="," data-grouping-separator=".">
+
+  <div role="navigation" aria-label="jumplinks" class="accessibility">
+      <a href="#formheadline">Zum Inhalt springen</a>
+  </div>
+
+  <header aria-labelledby="bannerheadline">
+      <a href="login.html">
+          <img class="title-image" src="images/big-logo-small.png" title="BIG Smart Production Logo" alt="BIG Smart Production Logo">
+      </a>
+      <h1 class="header-title" id="bannerheadline">
+          BIG Smart Production
+      </h1>
+  </header>
+
+  <div class="main-container">
+      <main aria-labelledby="formheadline">
+          <form class="form form-horizontal" (ngSubmit)="login()" #loginForm="ngForm">
+              <h2 id="formheadline" class="login-headline">Anmelden</h2>
+              <div class="form-row">
+                  <label class="form-label" for="username-input">Benutzername</label>
+                  <input [(ngModel)]="credentials.username" name="username" class="form-input" placeholder="Benutzername" required>
+              </div>
+              <div class="form-row">
+                  <label class="form-label" for="password-input">Passwort</label>
+                  <input [(ngModel)]="credentials.password" type="password" name="password" id="password-input" required class="form-input"
+                         minlength="4" maxlength="12" autocomplete="current-password" placeholder="Passwort">
+              </div>
+              <div class="form-row form-row-center">
+                  <button [disabled]=!loginForm.valid class="button button-submit" clear >Anmelden</button>
+                  <span [hidden]="!showError"> Email oder Passwort ist falsch! </span>
+              </div>
+          </form>
+      </main>
+  </div>
+
+  <footer>
+      © 2018 <abbr title="Business Informatics Group">BIG</abbr> Smart Production
+  </footer>
+  </body>
