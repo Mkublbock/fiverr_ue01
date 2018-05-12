@@ -22,14 +22,15 @@
     app.use(cors());
 
     // TODO add REST methods
+    app.get('/api/devices', getAvailable);
+    app.post('/api/login', authenticate);
+    app.post('/api/password', changePassword);
 
     /**
      * Send the list of available devices to the client
      * @param req The request
      * @param res The response
      */
-    app.get('/api/devices', getAvailable);
-
     function getAvailable(req, res) {
         // TODO send list of available devices to the client
         res.send(available);
@@ -40,19 +41,17 @@
      * @param req The request
      * @param res The response
      */
-    app.post('/api/login', authenticate);
-
     function authenticate(req, res) {
         // TODO check credentials and respond to client accordingly
         if (!req.body.username || !req.body.password) {
-            res.status(400);
-            res.send('No username or password entered');
+            // if one is null then send error message
+            res.status(400).send({ error: 'No username or password entered!' })
         }else{
-            if(req.body.username == "admin@mail.com" && req.body.password == "qwerty"){
+            if(req.body.username == user[1] && req.body.password == user[4]){
                 res.send(true);
             }else{
-                res.status(400);
-                res.send(user);
+                // send error message if username and password differ from config file
+                res.status(400).send({ error: 'Wrong username or password!' })
             }
         }
     }
@@ -64,7 +63,21 @@
      */
     function changePassword(req, res) {
         // TODO check old password and store new password
-
+        if (!req.body.oldPassword || !req.body.newPassword) {
+            res.status(400).send({ error: 'No password entered!' })
+        }else{
+            if(req.body.oldPassword != user[4]){
+                res.status(401).send({ error: 'Wrong password!' })
+            }else{
+                let text = user[0]+' '+user[1]+'\r\n'+user[3]+' '+req.body.newPassword;// set the new text for the config file
+                // write text to config file
+                fs.writeFile('resources/login.config', text, function (err) {
+                    if(err){
+                        throw err;
+                    }
+                });
+            }
+        }
     }
 
     /**
@@ -72,11 +85,12 @@
      */
     function readUser() {
         // TODO load user data from file
-        fs.readFile('resources/login.config', function (err, data) {
+        fs.readFile('resources/login.config', "utf8", function (err, data) {
             if(err){
                 throw err;
             }else{
-                user = data;
+                //split data string with regex to get username and password as own value
+                user = data.split(/[(\r\n' ')|(\n' ')]/);
             }
         });
     }
