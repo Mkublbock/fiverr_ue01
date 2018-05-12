@@ -8,13 +8,13 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './overview.component.html'
 })
 export class OverviewComponent implements OnInit {
-  devices: AvailableDevice[];
+  devices: AvailableDevice[] = [];
 
   constructor(private http: HttpClient) {
   }
 
   ngOnInit() {
-    this.http.get<AvailableDevice[]>('http://localhost:8081/api/devices').subscribe(data => this.devices = data.devices);
+    this.http.get<AvailableDevice[]>('http://localhost:8081/api/devices').subscribe(data => this.devices = data);
     console.log(this.devices);
   }
 }

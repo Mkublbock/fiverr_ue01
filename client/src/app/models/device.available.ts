@@ -5,4 +5,5 @@ export interface AvailableDevice {
   type: string;
   image: string;
   control: Control<any>;
+  devices?: any;
 }
