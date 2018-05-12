@@ -13,11 +13,12 @@ import { AuthService } from './services/authservice';
 import { MaxValidator, MinValidator } from './validators';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
+import {AuthGuard} from "./services/auth-guard.service";
 
 const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'options', component: OptionsComponent },
-  { path: 'overview', component: OverviewComponent },
+  { path: 'options', component: OptionsComponent, canActivate: [AuthGuard] },
+  { path: 'overview', component: OverviewComponent, canActivate: [AuthGuard] },
   {
     path: '',
     redirectTo: '/home',
@@ -47,7 +48,7 @@ const appRoutes: Routes = [
     HomeComponent
   ],
   providers: [
-    DiagramService, AuthService
+    DiagramService, AuthService, AuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -6,6 +6,8 @@ import { error } from 'util';
 @Injectable()
 export class AuthService {
 
+  isLoggedIn = false;
+
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -23,6 +25,7 @@ export class AuthService {
         console.log(data);
         if (data === true) {
           callback(access = true);
+          this.isLoggedIn=true;
         }
       }, response => {
         console.log(response);
