@@ -76,6 +76,7 @@
                         throw err;
                     }
                 });
+                res.send(true);
             }
         }
     }
