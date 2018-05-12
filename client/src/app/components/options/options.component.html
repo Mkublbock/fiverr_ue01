@@ -5,8 +5,8 @@
 </div>
 
 <header aria-labelledby="bannerheadline">
-    <a href="overview.html">
-        <img class="title-image" src="images/big-logo-small.png" title="BIG Smart Production Logo" alt="BIG Smart Production Logo">
+  <a [routerLink]="['/overview']" queryParamsHandling="merge">
+        <img class="title-image" src="../../assets/big-logo-small.png" title="BIG Smart Production Logo" alt="BIG Smart Production Logo">
     </a>
     <h1 class="header-title" id="bannerheadline">
         BIG Smart Production
@@ -19,8 +19,8 @@
             </li>
             <li class="nav-items">
                 <ul>
-                    <li><a href="overview.html" class="button" accesskey="1">Übersicht</a></li>
-                    <li><a href="login.html" class="button" accesskey="2">Abmelden</a></li>
+                    <li><a [routerLink]="['/overview']" class="button" queryParamsHandling="merge">Übersicht</a></li>
+                    <li><a [routerLink]="['/home']" class="button" queryParamsHandling="merge">Abmelden</a></li>
                 </ul>
             </li>
         </ul>
