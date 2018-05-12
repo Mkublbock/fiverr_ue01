@@ -12,13 +12,15 @@ import { DiagramService } from './services';
 import { AuthService } from './services/authservice';
 import { MaxValidator, MinValidator } from './validators';
 import { Routes, RouterModule } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
 
 const appRoutes: Routes = [
+  { path: 'home', component: HomeComponent },
   { path: 'options', component: OptionsComponent },
   { path: 'overview', component: OverviewComponent },
   {
     path: '',
-    redirectTo: '/',
+    redirectTo: '/home',
     pathMatch: 'full'
   }
 ];
@@ -41,7 +43,8 @@ const appRoutes: Routes = [
     MaxValidator,
     MinValidator,
     OverviewComponent,
-    OptionsComponent
+    OptionsComponent,
+    HomeComponent
   ],
   providers: [
     DiagramService, AuthService
