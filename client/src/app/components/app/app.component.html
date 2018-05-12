@@ -28,7 +28,8 @@
               </div>
               <div class="form-row form-row-center">
                   <button [disabled]=!loginForm.valid class="button button-submit" clear >Anmelden</button>
-                  <span [hidden]="!showError"> Email oder Passwort ist falsch! </span>
+                  <br>
+                  <span style="color:red" [hidden]="!showError"> Email oder Passwort ist falsch! </span>
               </div>
           </form>
       </main>
@@ -38,3 +39,4 @@
       © 2018 <abbr title="Business Informatics Group">BIG</abbr> Smart Production
   </footer>
   </body>
+  <router-outlet></router-outlet>
