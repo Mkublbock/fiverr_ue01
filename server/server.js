@@ -4,7 +4,7 @@
 
 /* global require */
 
-(function() {
+(function () {
     "use strict";
 
     const express = require("express");
@@ -28,8 +28,11 @@
      * @param req The request
      * @param res The response
      */
+    app.get('/api/devices', getAvailable);
+
     function getAvailable(req, res) {
         // TODO send list of available devices to the client
+        res.send(available);
     }
 
     /**
@@ -37,8 +40,21 @@
      * @param req The request
      * @param res The response
      */
+    app.post('/api/login', authenticate);
+
     function authenticate(req, res) {
         // TODO check credentials and respond to client accordingly
+        if (!req.body.username || !req.body.password) {
+            res.status(400);
+            res.send('No username or password entered');
+        }else{
+            if(req.body.username == "admin@mail.com" && req.body.password == "qwerty"){
+                res.send(true);
+            }else{
+                res.status(400);
+                res.send(user);
+            }
+        }
     }
 
     /**
@@ -48,6 +64,7 @@
      */
     function changePassword(req, res) {
         // TODO check old password and store new password
+
     }
 
     /**
@@ -55,6 +72,13 @@
      */
     function readUser() {
         // TODO load user data from file
+        fs.readFile('resources/login.config', function (err, data) {
+            if(err){
+                throw err;
+            }else{
+                user = data;
+            }
+        });
     }
 
     /**
@@ -62,9 +86,16 @@
      */
     function readAvailable() {
         // TODO load available devices from file
+        fs.readFile('resources/devices.json', function (err, data) {
+            if(err){
+                throw err;
+            }else {
+                available = data;
+            }
+        });
     }
 
-    const server = app.listen(8081, function() {
+    const server = app.listen(8081, function () {
         readUser();
         readAvailable();
 
