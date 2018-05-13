@@ -18,7 +18,6 @@ export class HomeComponent {
   login() {
     console.log(' Login called ');
     this.auth.login(this.credentials, access => {
-      console.log(access);
       if (access) {
         this.showError = false;
         this.router.navigate(['/overview']);

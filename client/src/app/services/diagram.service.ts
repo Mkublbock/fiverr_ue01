@@ -4,6 +4,7 @@ import '../models/arrow.model';
 import '../models/device.model';
 import { ObserveOnMessage } from 'rxjs/operators/observeOn';
 import { forEach } from '@angular/router/src/utils/collection';
+import {Router} from "@angular/router";
 
 @Injectable()
 export class DiagramService {
@@ -11,7 +12,7 @@ export class DiagramService {
   devices: Device<any>[] = [];
   arrows: Arrow[] = [];
 
-  constructor(/* TODO inject other services or core classes if necessary */) {
+  constructor(private router: Router) {
   }
 
   initDevices(func: (device: Device<any>) => void): void {
@@ -41,6 +42,8 @@ export class DiagramService {
 
   onDeviceDetails(device: Device<any>): void {
     // TODO navigate to the details view for the given device
+    console.log("yes");
+    this.router.navigate(['/details/'+device.index]);
   }
 
   afterArrowAdd(arrow: Arrow): void {

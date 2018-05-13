@@ -20,6 +20,6 @@ export class OverviewComponent implements OnInit {
   }
 
   logout(){
-    
+    this.authService.logout();
   }
 }
