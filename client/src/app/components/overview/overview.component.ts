@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AvailableDevice } from '../../models/device.available';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
-import {AuthService} from "../../services/authservice";
+import { AuthService } from '../../services/authservice';
+import { DiagramService } from '../../services/diagram.service';
 
 @Component({
   selector: 'app-overview',
@@ -11,7 +12,7 @@ import {AuthService} from "../../services/authservice";
 export class OverviewComponent implements OnInit {
   devices: AvailableDevice[] = [];
 
-  constructor(private http: HttpClient, private authService:AuthService) {
+  constructor(private http: HttpClient, private authService: AuthService, protected diagram: DiagramService) {
   }
 
   ngOnInit() {
@@ -19,7 +20,7 @@ export class OverviewComponent implements OnInit {
     console.log(this.devices);
   }
 
-  logout(){
+  logout() {
     this.authService.logout();
   }
 }

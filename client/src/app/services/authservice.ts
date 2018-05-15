@@ -8,7 +8,7 @@ import {tap, delay} from 'rxjs/operators';
 export class AuthService {
 
   isLoggedIn: Observable<boolean> = Observable.of(false);
-  private loginStatus:boolean;
+  private loginStatus: boolean;
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -55,7 +55,7 @@ export class AuthService {
     console.log(this.isLoggedIn);
   }
 
-  getIsLoggedIn():boolean {
+  getIsLoggedIn(): boolean {
     console.log(this.isLoggedIn.subscribe(value => {
       this.loginStatus = value;
     }));
