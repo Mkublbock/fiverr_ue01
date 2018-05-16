@@ -55,7 +55,7 @@ const appRoutes: Routes = [
     HomeComponent,
     DetailContinuousComponent,
     DetailBooleanComponent,
-    DetailEnumerationComponent,
+    DetailEnumerationComponent
   ],
   providers: [
     DiagramService, AuthService, AuthGuard, DeviceService

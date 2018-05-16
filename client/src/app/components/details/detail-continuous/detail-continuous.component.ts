@@ -8,14 +8,14 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail-continuous',
-  templateUrl: './detail-continuous.component.html',
-  styleUrls: ['./detail-continuous.component.css']
+  templateUrl: './detail-continuous.component.html'
 })
 export class DetailContinuousComponent {
 
   devices: any[];
   device;
   index: string;
+
 
   constructor(private diagramServce: DiagramService, private http: HttpClient, private router: Router) {
     this.devices = diagramServce.devices;

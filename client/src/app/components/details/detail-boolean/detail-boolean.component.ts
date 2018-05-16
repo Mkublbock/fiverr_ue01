@@ -1,4 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { DeviceService } from '../../../services/device.service';
 import { Observable } from 'rxjs/Observable';
 import { DiagramService } from '../../../services/diagram.service';
 import { AvailableDevice } from '../../../models/device.available';
@@ -8,8 +9,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail-boolean',
-  templateUrl: './detail-boolean.component.html',
-  styleUrls: ['./detail-boolean.component.css']
+  templateUrl: './detail-boolean.component.html'
 })
 export class DetailBooleanComponent {
 
@@ -22,6 +22,6 @@ export class DetailBooleanComponent {
     this.index = this.router.url.slice(this.router.url.length - 1, this.router.url.length);
     this.device = this.devices[parseInt(this.index, 10) - 1];
     console.log(this.device);
-  }
 
+  }
 }
