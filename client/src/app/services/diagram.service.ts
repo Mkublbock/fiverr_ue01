@@ -4,7 +4,7 @@ import '../models/arrow.model';
 import '../models/device.model';
 import { ObserveOnMessage } from 'rxjs/operators/observeOn';
 import { forEach } from '@angular/router/src/utils/collection';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class DiagramService {
@@ -42,13 +42,11 @@ export class DiagramService {
 
   onDeviceDetails(device: Device<any>): void {
     // TODO navigate to the details view for the given device
-    console.log(device);
     switch (device.control.type) {
       case 'enum': this.router.navigate(['/detailsenum/' + device.index]); break;
       case 'continuous': this.router.navigate(['/detailscont/' + device.index]); break;
       case 'boolean':  this.router.navigate(['/detailsbool/' + device.index]); break;
     }
-
   }
 
   afterArrowAdd(arrow: Arrow): void {

@@ -10,7 +10,7 @@ import { OverviewComponent } from './components/overview/overview.component';
 import { OptionsComponent } from './components/options/options.component';
 import { DiagramService } from './services';
 import { AuthService } from './services/authservice';
-import { DeviceService } from './services/device-service.service';
+import { DeviceService } from './services/device.service';
 import { MaxValidator, MinValidator } from './validators';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
@@ -55,7 +55,7 @@ const appRoutes: Routes = [
     HomeComponent,
     DetailContinuousComponent,
     DetailBooleanComponent,
-    DetailEnumerationComponent,
+    DetailEnumerationComponent
   ],
   providers: [
     DiagramService, AuthService, AuthGuard, DeviceService
