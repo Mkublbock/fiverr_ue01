@@ -31,19 +31,18 @@
 
 <div class="main-container">
     <main aria-labelledby="deviceheadline" class="details">
-        <h2 id="deviceheadline">Intelligentes Förderband 3</h2>
+        <h2 id="deviceheadline">{{device.title}}</h2>
 
         <div class="details-container">
             <div class="details-image-container">
-              <ngx-charts-line-chart frameborder="0"
-                                     [results]="device"
+              <ngx-charts-line-chart [results]="data"
                                      [xAxis]="true"
                                      [yAxis]="true"
                                      [legend]="true"
                                      [showXAxisLabel]="true"
                                      [showYAxisLabel]="true"
                                      xAxisLabel="Zeit"
-                                     [yAxisLabel]="device.yLabel"
+                                     [yAxisLabel]="device.control.yLabel"
                                      [autoScale]="autoScale">
               </ngx-charts-line-chart>
             </div>
