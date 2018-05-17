@@ -20,7 +20,14 @@ export class DetailContinuousComponent {
 
   lastValue = 0;
 
-  data: Object[] = [];
+  data: any[] = [
+    {
+      "name": "Temparatur",
+      "series": [
+      ]
+    }
+  ];
+
 
   constructor(private diagramServce: DiagramService, private http: HttpClient, private router: Router) {
     this.devices = diagramServce.devices;
@@ -28,14 +35,17 @@ export class DetailContinuousComponent {
     this.device = this.devices[parseInt(this.index, 10) - 1];
   }
 
-  addData(value) {
-    console.log(value);
-    this.timeStamp = new Date();
-    const time = this.timeStamp.getDate() + '.' + this.timeStamp.getMonth() + '.' + this.timeStamp.getFullYear()
-      + ', ' + this.timeStamp.getHours() + ':' + this.timeStamp.getMinutes() + ':' + this.timeStamp.getSeconds() + ': ';
-    if (this.lastValue !== value) {
-      this.textareaRow += time + '' +  this.lastValue + '  ->  ' + value + '\n';
-      this.lastValue = value;
+  addData(value:number) {
+    if(value<=this.device.control.max&&value>=this.device.control.min){
+      this.timeStamp = new Date();
+      const time = this.timeStamp.getDate() + '.' + this.timeStamp.getMonth() + '.' + this.timeStamp.getFullYear()
+        + ', ' + this.timeStamp.getHours() + ':' + this.timeStamp.getMinutes() + ':' + this.timeStamp.getSeconds() + ': ';
+      if (this.lastValue !== value) {
+        this.textareaRow += time + '' +  this.lastValue + '  ->  ' + value + '\n';
+        this.lastValue = value;
+      }
+      this.data[0].series.push({"name": time, "value": value});
+      this.data=[...this.data];
     }
   }
 }
