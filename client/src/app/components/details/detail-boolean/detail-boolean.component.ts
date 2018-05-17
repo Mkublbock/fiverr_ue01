@@ -1,11 +1,11 @@
-import {Component, OnInit, Inject} from '@angular/core';
-import {DeviceService} from '../../../services/device.service';
-import {Observable} from 'rxjs';
-import {DiagramService} from '../../../services/diagram.service';
-import {AvailableDevice} from '../../../models/device.available';
-import {HttpClient} from '@angular/common/http';
-import {map, filter} from 'rxjs/operators';
-import {Router} from '@angular/router';
+import { Component, OnInit, Inject } from '@angular/core';
+import { DeviceService } from '../../../services/device.service';
+import { Observable } from 'rxjs/observable';
+import { DiagramService } from '../../../services/diagram.service';
+import { AvailableDevice } from '../../../models/device.available';
+import { HttpClient } from '@angular/common/http';
+import { map, filter } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-detail-boolean',
@@ -13,16 +13,17 @@ import {Router} from '@angular/router';
 })
 export class DetailBooleanComponent {
 
+  timeStamp;
   devices: any[];
   device: AvailableDevice;
   index: string;
   data: Object[];
 
-  trueCount: number = 0;
-  falseCount: number = 0;
+  trueCount = 0;
+  falseCount = 0;
 
-  textareaRow: string = '';
-  lastCheckBoxValue: boolean = false;
+  textareaRow = '';
+  lastCheckBoxValue = false;
 
   constructor(private diagramServce: DiagramService, private router: Router) {
     this.devices = diagramServce.devices;
@@ -32,18 +33,21 @@ export class DetailBooleanComponent {
   }
 
   addData(checkBoxValue: boolean) {
+    this.timeStamp = new Date();
+    const time = this.timeStamp.getDate() + '.' + this.timeStamp.getMonth() + '.' + this.timeStamp.getFullYear()
+      + ', ' + this.timeStamp.getHours() + ':' + this.timeStamp.getMinutes() + ':' + this.timeStamp.getSeconds() + ': ';
     if (checkBoxValue && !this.lastCheckBoxValue) {
       this.trueCount++;
-      this.textareaRow += "Aus -> An\n";
+      this.textareaRow += time + '' +  'Aus -> An\n';
       this.lastCheckBoxValue = true;
     } else {
       if (!checkBoxValue && this.lastCheckBoxValue) {
-        this.textareaRow += "An -> Aus\n";
+        this.textareaRow += time + '' +  'An -> Aus\n';
         this.falseCount++;
         this.lastCheckBoxValue = false;
       }
     }
 
-    this.data = [{"name": "true", "value": this.trueCount}, {"name": "false", "value": this.falseCount}];
+    this.data = [{ 'name': 'true', 'value': this.trueCount }, { 'name': 'false', 'value': this.falseCount }];
   }
 }

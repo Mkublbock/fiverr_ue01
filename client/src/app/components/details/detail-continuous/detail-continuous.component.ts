@@ -12,9 +12,13 @@ import { Router } from '@angular/router';
 })
 export class DetailContinuousComponent {
 
+  timeStamp;
+  textareaRow = '';
   devices: any[];
   device;
   index: string;
+
+  lastValue = 0;
 
   data: Object[] = [];
 
@@ -25,9 +29,14 @@ export class DetailContinuousComponent {
     console.log(this.device.yLabel);
   }
 
-  addData() {
-
-
-    this.data;
+  addData(value) {
+    console.log(value);
+    this.timeStamp = new Date();
+    const time = this.timeStamp.getDate() + '.' + this.timeStamp.getMonth() + '.' + this.timeStamp.getFullYear()
+      + ', ' + this.timeStamp.getHours() + ':' + this.timeStamp.getMinutes() + ':' + this.timeStamp.getSeconds() + ': ';
+    if (this.lastValue !== value) {
+      this.textareaRow += time + '' +  this.lastValue + '  ->  ' + value + '\n';
+      this.lastValue = value;
+    }
   }
 }
