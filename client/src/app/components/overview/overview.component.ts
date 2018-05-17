@@ -19,8 +19,4 @@ export class OverviewComponent implements OnInit {
     this.http.get<AvailableDevice[]>('http://localhost:8081/api/devices').subscribe(data => this.devices = data);
     console.log(this.devices);
   }
-
-  logout() {
-    this.authService.logout();
-  }
 }

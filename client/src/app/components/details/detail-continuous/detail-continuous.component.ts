@@ -1,10 +1,11 @@
-import {Component, OnInit, Inject} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
-import {DiagramService} from '../../../services/diagram.service';
-import {AvailableDevice} from '../../../models/device.available';
-import {HttpClient} from '@angular/common/http';
-import {map, filter} from 'rxjs/operators';
-import {Router} from '@angular/router';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { DiagramService } from '../../../services/diagram.service';
+import { AvailableDevice } from '../../../models/device.available';
+import { HttpClient } from '@angular/common/http';
+import { map, filter } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/authservice';
 
 @Component({
   selector: 'app-detail-continuous',
@@ -29,23 +30,23 @@ export class DetailContinuousComponent {
   ];
 
 
-  constructor(private diagramServce: DiagramService, private http: HttpClient, private router: Router) {
+  constructor(private diagramServce: DiagramService, private http: HttpClient, private router: Router, authService: AuthService) {
     this.devices = diagramServce.devices;
     this.index = this.router.url.slice(this.router.url.length - 1, this.router.url.length);
     this.device = this.devices[parseInt(this.index, 10) - 1];
   }
 
-  addData(value:number) {
-    if(value<=this.device.control.max&&value>=this.device.control.min){
+  addData(value: number) {
+    if (value <= this.device.control.max && value >= this.device.control.min) {
       this.timeStamp = new Date();
       const time = this.timeStamp.getDate() + '.' + this.timeStamp.getMonth() + '.' + this.timeStamp.getFullYear()
         + ', ' + this.timeStamp.getHours() + ':' + this.timeStamp.getMinutes() + ':' + this.timeStamp.getSeconds() + ': ';
       if (this.lastValue !== value) {
-        this.textareaRow += time + '' +  this.lastValue + '  ->  ' + value + '\n';
+        this.textareaRow += time + '' + this.lastValue + '  ->  ' + value + '\n';
         this.lastValue = value;
       }
-      this.data[0].series.push({"name": time, "value": value});
-      this.data=[...this.data];
+      this.data[0].series.push({ "name": time, "value": value });
+      this.data = [...this.data];
     }
   }
 }

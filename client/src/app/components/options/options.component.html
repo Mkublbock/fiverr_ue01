@@ -20,7 +20,7 @@
             <li class="nav-items">
                 <ul>
                     <li><a [routerLink]="['/overview']" class="button" queryParamsHandling="merge">Übersicht</a></li>
-                    <li><a [routerLink]="['/home']" class="button" queryParamsHandling="merge">Abmelden</a></li>
+                    <li><a [routerLink]="['/home']" (click)="authService.logout()" class="button" queryParamsHandling="merge">Abmelden</a></li>
                 </ul>
             </li>
         </ul>

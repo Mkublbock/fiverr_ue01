@@ -12,12 +12,12 @@ export class OptionsComponent {
   newPassword;
   showWrongPassword = false;
   showSuccess = false;
-  constructor(private auth: AuthService) { }
+  constructor(private authService: AuthService) { }
 
   saveSettings() {
     console.log(this.newPassword + ' ' + this.credentials.newPassword);
     if (this.newPassword === this.credentials.newPassword) {
-      this.auth.changePassword(this.credentials, access => {
+      this.authService.changePassword(this.credentials, access => {
         if (access) {
           this.showSuccess = true;
           this.showError = false;

@@ -6,6 +6,7 @@ import { AvailableDevice } from '../../../models/device.available';
 import { HttpClient } from '@angular/common/http';
 import { map, filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/authservice';
 
 @Component({
   selector: 'app-detail-boolean',
@@ -25,7 +26,7 @@ export class DetailBooleanComponent {
   textareaRow = '';
   lastCheckBoxValue = false;
 
-  constructor(private diagramServce: DiagramService, private router: Router) {
+  constructor(private diagramServce: DiagramService, private router: Router, authService: AuthService) {
     this.devices = diagramServce.devices;
     this.index = this.router.url.slice(this.router.url.length - 1, this.router.url.length);
     this.device = this.devices[parseInt(this.index, 10) - 1];
@@ -38,11 +39,11 @@ export class DetailBooleanComponent {
       + ', ' + this.timeStamp.getHours() + ':' + this.timeStamp.getMinutes() + ':' + this.timeStamp.getSeconds() + ': ';
     if (checkBoxValue && !this.lastCheckBoxValue) {
       this.trueCount++;
-      this.textareaRow += time + '' +  'Aus -> An\n';
+      this.textareaRow += time + '' + 'Aus -> An\n';
       this.lastCheckBoxValue = true;
     } else {
       if (!checkBoxValue && this.lastCheckBoxValue) {
-        this.textareaRow += time + '' +  'An -> Aus\n';
+        this.textareaRow += time + '' + 'An -> Aus\n';
         this.falseCount++;
         this.lastCheckBoxValue = false;
       }
