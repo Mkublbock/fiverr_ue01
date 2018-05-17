@@ -48,7 +48,7 @@
             // if one is null then send error message
             res.status(400).send({ error: 'No username or password entered!' })
         }else{
-            if(req.body.username == user[1] && req.body.password == user[4]){
+            if(req.body.username == user[1] && req.body.password == user[3]){
                 res.send(true);
             }else{
                 // send error message if username and password differ from config file
@@ -67,7 +67,7 @@
         if (!req.body.oldPassword || !req.body.newPassword) {
             res.status(400).send({ error: 'No password entered!' })
         }else{
-            if(req.body.oldPassword != user[4]){
+            if(req.body.oldPassword != user[3]){
                 res.status(401).send({ error: 'Wrong password!' })
             }else{
                 let text = user[0]+' '+user[1]+'\r\n'+user[3]+' '+req.body.newPassword;// set the new text for the config file
