@@ -3,7 +3,7 @@
     {
       "title": "3D-Drucker",
       "type": "item-generator",
-      "image": "images/item_generator.svg",
+      "image": "assets/item_generator.svg",
       "control": {
         "title": "Produktfortschritt einstellen",
         "type": "enum",
@@ -17,7 +17,7 @@
     {
       "title": "Maschine",
       "type": "machine",
-      "image": "images/machine.svg",
+      "image": "assets/machine.svg",
       "control": {
         "title": "Temperatur einstellen",
         "type": "continuous",
@@ -29,7 +29,7 @@
     {
       "title": "Förderband",
       "type": "conveyor",
-      "image": "images/conveyor.svg",
+      "image": "assets/conveyor.svg",
       "control": {
         "title": "Ein-/Ausschalten",
         "type": "boolean"
@@ -38,7 +38,7 @@
     {
       "title": "Intelligentes Förderband",
       "type": "intelligent-conveyor",
-      "image": "images/intelligent_conveyor.svg",
+      "image": "assets/intelligent_conveyor.svg",
       "control": {
         "title": "Ein-/Ausschalten",
         "type": "boolean"
@@ -47,7 +47,7 @@
     {
       "title": "Temporäres Lager",
       "type": "interim-storage",
-      "image": "images/interim_storage.svg",
+      "image": "assets/interim_storage.svg",
       "control": {
         "title": "Produkte einstellen",
         "type": "continuous",
@@ -59,7 +59,7 @@
     {
       "title": "Endlager",
       "type": "end-storage",
-      "image": "images/end_storage.svg",
+      "image": "assets/end_storage.svg",
       "control": {
         "title": "Produkte einstellen",
         "type": "continuous",
@@ -71,7 +71,7 @@
     {
       "title": "Mülllager",
       "type": "trash-storage",
-      "image": "images/trash_storage.svg",
+      "image": "assets/trash_storage.svg",
       "control": {
         "title": "Produkte einstellen",
         "type": "continuous",
