@@ -1,14 +1,12 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {AuthenticationRequest, PasswordChangeRequest} from '../models';
-import {Observable} from 'rxjs';
-import {tap, delay} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthenticationRequest, PasswordChangeRequest } from '../models';
+import { Observable, Subject } from 'rxjs';
+import { tap, delay } from 'rxjs/operators';
+import { visitAll } from '@angular/compiler';
 
 @Injectable()
 export class AuthService {
-
-  isLoggedIn: Observable<boolean> = Observable.of(false);
-  private loginStatus: boolean;
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -24,8 +22,8 @@ export class AuthService {
     console.log('Authservice login called');
     this.http.post('http://localhost:8081/api/login', credentials, this.httpOptions).subscribe(data => {
       if (data === true) {
+        localStorage.setItem('loginStatus', 'true');
         callback(access = true);
-        this.isLoggedIn = Observable.of(true);
       }
     }, response => {
       console.log(response);
@@ -51,14 +49,11 @@ export class AuthService {
   }
 
   logout(): void {
-    this.isLoggedIn = Observable.of(false);
-    console.log(this.isLoggedIn);
+    localStorage.setItem('loginStatus', 'false');
   }
 
-  getIsLoggedIn(): boolean {
-    console.log(this.isLoggedIn.subscribe(value => {
-      this.loginStatus = value;
-    }));
-    return this.loginStatus;
+  getIsLoggedIn() {
+   const login = localStorage.getItem('loginStatus');
+   return login;
   }
 }
