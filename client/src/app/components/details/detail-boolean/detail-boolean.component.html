@@ -44,8 +44,7 @@
             </div>
             <div class="details-control-container">
                 <label class="accessibility" for="details-log">Letzte Werteänderungen</label>
-                <textarea id="details-log" class="details-logs" placeholder="Gerätelog" readonly rows="6" *ngFor="let row of textareaRow">
-                {{row}}
+                <textarea id="details-log" class="details-logs" placeholder="Gerätelog" readonly rows="6" [(ngModel)]="textareaRow">
                 </textarea>
 
                 <div class="details-settings">

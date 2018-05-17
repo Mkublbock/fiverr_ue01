@@ -16,12 +16,18 @@ export class DetailContinuousComponent {
   device;
   index: string;
 
+  data: Object[] = [];
 
   constructor(private diagramServce: DiagramService, private http: HttpClient, private router: Router) {
     this.devices = diagramServce.devices;
     this.index = this.router.url.slice(this.router.url.length - 1, this.router.url.length);
     this.device = this.devices[parseInt(this.index, 10) - 1];
-    console.log(this.device);
+    console.log(this.device.yLabel);
   }
 
+  addData() {
+
+
+    this.data;
+  }
 }

@@ -14,32 +14,36 @@ import {Router} from '@angular/router';
 export class DetailBooleanComponent {
 
   devices: any[];
-  device;
+  device: AvailableDevice;
   index: string;
-  data: Object[] = [{"name":"true","value":0},{"name": "false", "value":0}];
+  data: Object[];
 
   trueCount: number = 0;
   falseCount: number = 0;
 
-  textareaRow: string[] = [];
+  textareaRow: string = '';
+  lastCheckBoxValue: boolean = false;
 
-  constructor(private diagramServce: DiagramService, private http: HttpClient, private router: Router) {
+  constructor(private diagramServce: DiagramService, private router: Router) {
     this.devices = diagramServce.devices;
     this.index = this.router.url.slice(this.router.url.length - 1, this.router.url.length);
     this.device = this.devices[parseInt(this.index, 10) - 1];
-    this.data = [{"name":"true","value":0},{"name": "false", "value":0}];
     console.log(this.device);
   }
 
   addData(checkBoxValue: boolean) {
-    if (checkBoxValue) {
+    if (checkBoxValue && !this.lastCheckBoxValue) {
       this.trueCount++;
-      this.textareaRow.push("Aus -> An");
+      this.textareaRow += "Aus -> An\n";
+      this.lastCheckBoxValue = true;
     } else {
-      this.textareaRow.push("An -> Aus");
-      this.falseCount++;
+      if (!checkBoxValue && this.lastCheckBoxValue) {
+        this.textareaRow += "An -> Aus\n";
+        this.falseCount++;
+        this.lastCheckBoxValue = false;
+      }
     }
-    console.log("asd");
-    this.data = [{"name":"true","value":this.trueCount},{"name": "false", "value":this.falseCount}];
+
+    this.data = [{"name": "true", "value": this.trueCount}, {"name": "false", "value": this.falseCount}];
   }
 }
