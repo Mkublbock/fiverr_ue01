@@ -5,6 +5,7 @@ import '../models/device.model';
 import { ObserveOnMessage } from 'rxjs/operators/observeOn';
 import { forEach } from '@angular/router/src/utils/collection';
 import {Router} from '@angular/router';
+import {NgZone} from "@angular/core";
 
 @Injectable()
 export class DiagramService {
@@ -12,7 +13,7 @@ export class DiagramService {
   devices: Device<any>[] = [];
   arrows: Arrow[] = [];
 
-  constructor(private router: Router) {
+  constructor(private router: Router, public zone: NgZone) {
   }
 
   initDevices(func: (device: Device<any>) => void): void {
@@ -43,9 +44,9 @@ export class DiagramService {
   onDeviceDetails(device: Device<any>): void {
     // TODO navigate to the details view for the given device
     switch (device.control.type) {
-      case 'enum': this.router.navigate(['/detailsenum/' + device.index]); break;
-      case 'continuous': this.router.navigate(['/detailscont/' + device.index]); break;
-      case 'boolean':  this.router.navigate(['/detailsbool/' + device.index]); break;
+      case 'enum': this.zone.run(() => {this.router.navigate(['/detailsenum/' + device.index])}); break;
+      case 'continuous': this.zone.run(() => {this.router.navigate(['/detailscont/' + device.index])}); break;
+      case 'boolean':  this.zone.run(() => {this.router.navigate(['/detailsbool/' + device.index])}); break;
     }
   }
 
