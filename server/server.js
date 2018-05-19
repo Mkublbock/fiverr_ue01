@@ -42,6 +42,7 @@
      * @param res The response
      */
     function authenticate(req, res) {
+        console.log(user[0] + ' ' + user[1] + ' ' + user[2] + ' ' + user[3] + ' ' + user[4]);
         readUser();
         // TODO check credentials and respond to client accordingly
         if (!req.body.username || !req.body.password) {
